@@ -1,0 +1,1307 @@
+
+
+
+<?php
+session_start();
+
+ ?>
+ <!DOCTYPE html>
+ <html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>AnveshFlix-Account</title>
+   <link rel="stylesheet" href="homepage.css" type="text/css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ </head>
+   <body>
+     <header>
+
+         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+             <a href="homepage.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+             <span class="navbar-text">AnuFlix</span>
+
+             <ul class="navbar-nav">
+
+               <li class="nav-item"> <a href="homepage.php" class="nav-link">Home</a> </li>
+
+               <li class="nav-item"> <a href="logout.php" class="nav-link">Logout</a> </li>
+             </ul>
+
+
+         </nav>
+
+      </header>
+
+      <div class="container">
+        <?php
+              include 'dbh.php';
+              $id = $_SESSION['id'];
+              $sql = "SELECT * FROM user1 WHERE id = $id ";
+              $newrecords = mysqli_query($conn,$sql);
+              $result = mysqli_fetch_assoc($newrecords);
+
+      echo"  <form  action='update.php' method='POST'>
+
+          <br><br><input type='text' class='form-control' placeholder='Enter full name' name='fname' value='".ucwords($result['name'])."'>
+          <br>
+          <input type='text' class='form-control' placeholder='Enter mobile number' name='phn' value='".$result['phone']."'>
+          <br>
+          <label><b>Date of Birth : </b></label>
+          <input type='text' class='from-control' placeholder='Enter Date of Birth' name='dob' value='".$result['DOB']."'><br>
+
+              <div class='signupbutton'>
+                <br><br>
+                <button type='submit' class='btn btn-success' name='sub' value='submit'>Update Details</button>
+
+              </div>
+              </form>
+
+
+              <br><br>
+              <label><b>Email Id : </b>".$result['email']."</label>
+              <br><br>
+              <a href='accountp.php'>Change Password</a>
+
+              ";
+         ?>
+
+      </div>
+
+    </body>
+
+  </html>
+
+<?php
+session_start();
+
+ ?>
+ <!DOCTYPE html>
+ <html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>AnveshFlix-Account</title>
+   <link rel="stylesheet" href="homepage.css" type="text/css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ </head>
+   <body>
+     <header>
+         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+             <a href="homepage.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+             <span class="navbar-text">AnveshFlix</span>
+
+             <ul class="navbar-nav">
+
+               <li class="nav-item"> <a href="homepage.php" class="nav-link">Home</a> </li>
+
+               <li class="nav-item"> <a href="logout.php" class="nav-link">Logout</a> </li>
+             </ul>
+         </nav>
+      </header>
+      <div class="container">
+        <?php
+              include 'dbh.php';
+              $id = $_SESSION['id'];
+              $sql = "SELECT * FROM user1 WHERE id = $id ";
+              $newrecords = mysqli_query($conn,$sql);
+              $result = mysqli_fetch_assoc($newrecords);
+
+      echo"  <form  action='update.php' method='POST'>
+
+          <br><br><input type='text' class='form-control' placeholder='Enter full name' name='fname' value='".ucwords($result['name'])."'>
+          <br>
+          <input type='text' class='form-control' placeholder='Enter mobile number' name='phn' value='".$result['phone']."'>
+          <br>
+          <label><b>Date of Birth : </b></label>
+          <input type='text' class='from-control' placeholder='Enter Date of Birth' name='dob' value='".$result['DOB']."'><br>
+
+              <div class='signupbutton'>
+                <br><br>
+                <button type='submit' class='btn btn-success' name='sub' value='submit'>Update Details</button>
+              </div>
+              </form>
+              <br><br>
+              <label><b>Email Id : </b>".$result['email']."</label>
+              <br><br>
+              <form class='' action='updatep.php' method='post'>
+                <input type='password' class='form-control' placeholder='Enter old password' name='oldp'><br>
+                <input type='password' class='form-control' placeholder='Enter new password' name='newp'><br>
+                <button type='submit' class='btn btn-success ' name='subpass' value='submit'>Update Password</button><br>
+
+              </form>
+
+              ";
+         ?>
+
+      </div>
+
+    </body>
+
+  </html>
+
+<?php
+session_start();
+
+ ?>
+
+ <!DOCTYPE html>
+ <head>
+   <meta charset="utf-8">
+   <title>NeonFlix-Admin</title>
+   <link rel="stylesheet" href="user.css" type="text/css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ </head>
+ <body>
+   <header>
+     <div class="container-fluid">
+       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+           <a href="homepage.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+           <span class="navbar-text">NeonFlix</span>
+           <ul class="navbar-nav">
+             <li class="nav-item"> <a href="homepage.php" class="nav-link"> Home </a> </li>
+             <li class="nav-item"> <a href="logout.php" class="nav-link"> Logout</a> </li>
+           </ul>
+       </nav>
+       <div class="container">
+         <div class="jumbotron">
+           <h1> Enter the Movie details</h1>
+           <p> <b></b> </p> <br>
+           <form class="" action="admin-control.php" method="POST" enctype="multipart/form-data">
+
+            <input type="text" class="form-control" placeholder="Movie Name" name="mname" value=""><br>
+             <input type="text" class="form-control" placeholder="Year of Release" name="release" value="">
+             <br>
+             <input type="text" class="form-control" placeholder="Genre" name="genre" value="">
+             <br>
+             <input type="number" class="form-control" placeholder="Runtime in minutes" name="rtime" value="">
+             <br>
+             <input type="text" class="form-control" placeholder="Description..." name="desc" value="">
+             <br>
+             <div class="row">
+               <div class="col">
+                 <table>
+                   <tr>
+                     <td> <label for=""><b>Upload Image : </b></label> </td>
+                     <td>
+                          <div class="">
+                              <input type="hidden" name="size" value="100000">
+
+                              <input type="file" name="image" value="">
+                          </div>
+                     </td>
+                   </tr>
+                 </table>
+               </div>
+               <div class="col">
+                 <table>
+                   <tr>
+                     <td> <label for=""><b>Upload Video : </b></label> </td>
+                     <td>
+                          <div class="">
+                              <input type="hidden" name="size" value="30000000">
+
+                              <input type="file" name="video" value="">
+                          </div>
+                     </td>
+                   </tr>
+                 </table>
+               </div>
+             </div> <br><br>
+             <div class="signupbutton">
+               <input type="submit" class ="btn btn-success btn-lg" name="upload" value="Submit" >
+             </div>
+           </form>
+        </div>
+         </div>
+       </div>
+   </div>
+ </header>
+ <footer class="page-footer font-small blue">
+   <div class="footer-copyright text-center py-3">© 2018 Copyright:
+     <a href="">chenna.anveshkumar143414@gmail.com</a>
+   </div>
+ </footer>
+   </body>
+ </html>
+
+
+<?php
+session_start();
+if (isset($_POST['upload'])) {
+  include 'dbh.php';
+  $targetvid = "video-uploads/".basename($_FILES['video']['name']);
+  $target = "uploads/".basename($_FILES['image']['name']);
+  $name = strtolower($_POST['mname']);
+  $rdate = $_POST['release'];
+  $genre = strtolower($_POST['genre']);
+  $rtime = $_POST['rtime'];
+  $desc = $_POST['desc'];
+  $image = $_FILES['image']['name'];
+  $video = $_FILES['video']['name'];
+  $sql = "INSERT INTO movies (name, rdate, genre, runtime, decription, imgpath, videopath)
+    VALUES('$name','$rdate','$genre','$rtime','$desc','$image','$video')";
+  mysqli_query($conn,$sql);
+  if (move_uploaded_file($_FILES['image']['tmp_name'],$target) && move_uploaded_file($_FILES['video']['tmp_name'],$targetvid)) {
+    header("Location: homepage.php");
+  }else {
+    echo "error uploading";
+  }
+}
+?>
+
+<?php
+  $conn = mysqli_connect("localhost","root","","sourcecodester_omsdb");
+  if(! $conn ) {
+      die('Could not connect: ' . mysqli_error());
+   }
+?>
+
+<?php
+include 'dbh.php';
+  $im = "SELECT * FROM movies ORDER BY name ASC" ;
+  $records = mysqli_query($conn,$im);
+  start:
+  $i=0;
+  echo"<div class='row'>";
+    while($result = mysqli_fetch_assoc($records)){
+      echo"<form action='movie.php' method='POST'>";
+      echo"<div class='col'>";
+      echo "<img src='uploads/".$result['imgpath']."' height='250' width='200' style='margin-top: 30px;margin-left:30px;margin-right:20px;' />";
+        echo"<div class='noob'>";
+          echo "<input type='submit' name='submit' class='btn btn-outline-info' style='display:block;width:200px;padding-bottom:15px;margin-bottom:30px;margin-left:30px;margin-right:20px;' value='".ucwords($result['name'])."'/>";
+        echo"</div>";
+      echo"</div>";
+      echo"</form>";
+      if ($i==4) {
+        echo"</div>";
+        goto start;
+      }
+      $i++;
+    }
+    echo"</div>";
+    ?>
+
+body{
+  font-family: sans-serif;
+  height: 100%;
+
+}
+.navbar-text{
+  font-size: 30px;
+  font-weight: bold;
+}
+.navbar li{
+  padding: 0 40px;
+}
+.nav-item a{
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+
+}
+.navbar span{
+  font-size: 25px;
+}
+.nav-item a:hover{
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
+.navbar-brand img{
+  height: 80px;
+
+}
+.container-fluid{
+  background-image: url(images/back.jpg);
+  height: 50vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+  border: 2px solid grey;
+}
+.container-fluid h1{
+  color: white;
+}
+
+
+
+.page-footer{
+  background-color: black;
+  color: white;
+}
+.col a{
+  text-align: center;
+}
+
+<?php
+session_start();
+
+ ?>
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>AnveshFlix-Homepage</title>
+  <link rel="stylesheet" href="homepage.css" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="#" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+            <span class="navbar-text">AnveshFlix</span>
+
+            <ul class="navbar-nav">
+              <?php
+              if (isset($_SESSION['id'])) {
+                if ($_SESSION['id'] == 1) {
+                  echo "<li class='nav-item'> <a href='admin.php' class='nav-link'>Add movie</a> </li>";
+                }
+              }
+              echo"<li class='nav-item'> <a href='account.php' class='nav-link'>Account</a> </li>
+
+                  <li class='nav-item'> <a href='logout.php' class='nav-link'>Logout</a> </li>
+                  </ul>
+                  </nav>
+                  <div class='container-fluid'>
+                  <br><br><br>";
+                  include 'dbh.php';
+                  $id = $_SESSION['id'];
+                  $quer = "SELECT * FROM user1 WHERE id = '$id' ";
+                  $quer2 = "SELECT * FROM movies WHERE mid in (SELECT mid from user1 where id = '$id') ";
+                  $check = mysqli_query($conn,$quer);
+                  $rel = mysqli_fetch_assoc($check);
+                  $check2 = mysqli_query($conn,$quer2);
+                  $rel2 = mysqli_fetch_assoc($check2);
+
+              echo"<h1 style='color:black;position:sticky;'>WELCOME </h1><b style = 'color: black;font-size: 25px'><i> ".ucwords($rel['name'])." !</i></b>
+                  </div>
+                  </header>
+                  <section>
+                <div class='jumbotron' style='margin-top:15px;padding-top:30px;padding-bottom:30px;'>
+                <div class='row'>
+                  <div class='col'>
+                    <form action='movie.php' method='POST'>
+                    <h4 style='color:black;font-size:30px;'>Recent :
+                    <input type='submit' name='submit' class='btn btn-success' style='display:inline;width:200px;margin-left:20px;margin-right:20px;' value='".ucwords($rel2['name'])."'/></h4>
+                    </form>
+                  </div>
+                  <div class='col'>
+                    <form action='search.php' method='POST'>
+                      <select  name='option' style='padding:5px;'>
+                        <option selected>Search By</option>
+                        <option value='name'>Name</option>
+                        <option value='genre'>Genre</option>
+                        <option value='rdate'>Release year</option>
+                      </select>
+                      <input type='text' placeholder='Enter..' style='margin-left:10px;margin-top:10px;padding:5px;' name='textoption'>
+
+                      <input type='submit' name='submit' class='btn btn-success' style='display:inline;width:100px;margin-left:20px;margin-right:20px;margin-top:5px;' value='Search'/></h4>
+                    </form>
+                  </div>
+                </div>
+                </div>";
+                  ?>
+      <div class="jumbotron">
+        <h2 style='margin-top:0px;padding-top:0px;'>Latest updated</h2>
+          <div class="row">
+            <?php
+              include 'latest-fetcher.php';
+             ?>
+          </div>
+      </div>
+      <div class="jumbotron">
+        <h2>  All movies</h2>
+          <?php
+            include 'fetcher.php';
+            ?>
+      </div>
+  </section>
+  <footer class="page-footer font-small blue">
+
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="">chenna.anveshkumar143414@gmail.com</a>
+    </div>
+
+  </footer>
+  </body>
+</html>
+
+<?php 
+include 'login.php';
+?>
+
+<?php
+include 'dbh.php';
+  $im = "SELECT * FROM movies" ;
+  $records = mysqli_query($conn,$im);
+  $count = mysqli_num_rows($records);
+  $i=$count;
+  $j=$count-3;
+  $newim = "SELECT * FROM movies WHERE mid BETWEEN '$j' AND '$i'" ;
+  $newrecords = mysqli_query($conn,$newim);
+    while($fetchr = mysqli_fetch_assoc($newrecords)){
+
+      echo"<form action='movie.php' method='POST'>";
+      echo"<div class='col'>";
+      echo "<img src='uploads/".$fetchr['imgpath']."' height='250' width='200' style='margin-top: 30px;margin-left:50px;margin-right:20px;' />";
+        echo"<div class='noob'>";
+          echo "<input type='submit' name='submit' class='btn btn-outline-info' style='display:block;width:200px;padding-bottom:15px;margin-bottom:30px;margin-left:50px;margin-right:20px;' value='".ucwords($fetchr['name'])."'/>";
+        echo"</div>";
+      echo"</div>";
+      echo"</form>";
+    }
+    ?>
+
+
+<?php
+session_start();
+
+ ?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AnuFlix</title>
+    <link rel="stylesheet" href="master.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+            <a href="login.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+            <span class="navbar-text">NeonFlix</span>
+            <ul class="navbar-nav">
+              <li class="nav-item"> <a href="#A" class="nav-link"> Services</a> </li>
+              <li class="nav-item"> <a href="user-login.php" class="nav-link"> SignIn</a> </li>
+            </ul>
+        </nav>
+        <div class="container">
+          <div class="jumbotron">
+            <h1>Watch Anywhere, <br> Watch Anytime... </h1> <br>
+            <a href="test.php" type="button" class="btn btn-danger btn-block">Sign Up Now</a>
+          </div>
+        </div>
+      </div>
+      </header>
+    <section class="features">
+        <a href="#" name="A"></a>
+        <h2>Our Services</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <p class="arrange"><img src="images/mob.png" alt=""> <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div><div class="col-md-4">
+              <p class="arrange"><img src="images/mess.png" alt=""> <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+              <div class="col-md-4">
+                <p class="arrange">
+                  <img src="images/desktop.jpg"> <br>   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+          </div>
+          <h3></h3>
+    </section>
+    <footer class="page-footer font-small blue">
+      <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="">chenna.anveshkumar143414@gmail.com</a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<?php
+  session_start();
+  session_destroy();
+  header("Location: login.php");
+?>
+
+
+body{
+  font-family: sans-serif;
+  height: 100%;
+}
+.navbar-text{
+  font-size: 30px;
+  font-weight: bold;
+}
+.navbar li{
+  padding: 0 40px;
+}
+.nav-item a{
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+
+}
+.nav-item a:hover{
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+.jumbotron{
+  position: inherit;
+  margin-top: 20%;
+}
+.jumbotron h1{
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+h2:after{
+  width: 150px;
+  height: 2px;
+  background-color: orange;
+  display: block;
+  content: "";
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.features h2{
+  margin-top: 60px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+.container-fluid{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0,0,0,0.2)),url(images/back.jpg);
+  height: 130vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.navbar-brand img{
+  height: 80px;
+}
+.features p{
+  margin-top: 20%;
+  width: 70%;
+  margin-left: 15%;
+}
+.arrange{
+  text-align: justify;
+}
+.row img{
+  height: 60px;
+  width: 60px;
+  margin-left: 40%;
+  margin-bottom: 20%;
+}
+.page-footer{
+  background-color: black;
+  color: white;
+}
+
+
+body{
+  background-color: black;
+}
+.jumbotron-fluid{
+  background-color: #2d2f33;
+  color: #e2dd31;
+  margin-left: 2%;
+  margin-right: 2%;
+  height: 150vh;
+}
+.jumbotron-fluid h1:hover{
+  color: #85c639;
+}
+.jumbotron-fluid h4:hover{
+  color: #85c639;
+}
+.jumbotron-fluid h5{
+  color:#9e8b24;
+}
+.container video{
+  margin-left: 2%;
+}
+.page-footer{
+  background-color: black;
+  color: white;
+}
+
+<?php
+session_start();
+if (isset($_POST['submit'])) {
+  $title = $_POST['submit'];
+  include 'dbh.php';
+  $im = "SELECT * FROM movies WHERE name = '$title'" ;
+  $records = mysqli_query($conn,$im);
+  echo"<!DOCTYPE html>";
+  echo"<html lang='en' dir='ltr'>";
+    echo"<head>";
+      echo"<meta charset='utf-8'>";
+      echo"<title>".$title."</title>";
+      echo"<link rel='stylesheet' href='movie.css'>";
+      echo"<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>";
+    echo"</head>";
+    echo"<body>";
+        echo"<div class='jumbotron-fluid'>";
+        echo"<div class='container'>";
+        while($result = mysqli_fetch_assoc($records)){
+            $mname = $result['name'];
+            $person = $_SESSION['id'];
+            $movieid = $result['mid'];
+            $current = $result['viewers'];
+            $newcount = $current + 1;
+            $newsql = "UPDATE movies SET viewers = '$newcount' WHERE name='$mname' ";
+            $nsql = "UPDATE user1 SET mid = '$movieid'";
+            $updatecount = mysqli_query($conn,$newsql);
+            $updatecount = mysqli_query($conn,$nsql);
+            $url ="video-uploads/".$result['videopath'];
+            echo"<br>";
+            echo"<a href='homepage.php' style='font-size: 20px;color:orange;border:1px solid orange;border-radius:5px;padding:10px;text-decoration:none;'>Back to Home </a>";
+          echo "<br><br><h5 style='display: inline;'><br>movie name : </h5><h1 style='display: inline;'>".ucwords($result['name'])."</h1>";
+          echo"<br><h5 style='display: inline;' >genre : </h5><h4 style='display: inline;'>".ucwords($result['genre'])."</h4>";
+          echo"<br><h5 style='display: inline;' >release year : </h5><h4 style='display: inline;'>".$result['rdate']."</h4>";
+          echo"<br><h5 style='display: inline;' >description : </h5><h4 style='display: inline;'>".ucfirst($result['decription'])."</h4>";
+          echo"<br><h5 style='display: inline;' >runtime : </h5><h4 style='display: inline;'>".$result['runtime']." mins </h4>";
+          echo"<br><h5 style='display: inline;' >views : </h5><h4 style='display: inline;'>".$result['viewers']."</h4>";
+          echo"<br><br><br>";
+          echo"<div class='embed-responsive embed-responsive-16by9'>";   
+          echo '<video controls="controls" class="embed-responsive-item">
+          <source src="'.$url.'" type="video/mp4"> 
+          Your browser does not support the HTML5 Video element.
+          </video>
+          '; 
+          echo"</div>";
+        }
+        echo"</div>";
+        echo"</div>";
+    echo"</body>";
+  echo"</html>";
+}
+?>
+
+<?php
+  session_start();
+  include 'dbh.php';
+    $username =  $_POST['mail'];
+    $password =  $_POST['pass'];
+    $sql = "SELECT * FROM user1 WHERE username = '$username' AND passwd = '$password' ";
+    $result = $conn->query($sql);
+    if(!$row = $result->fetch_assoc()) {
+      echo "incorrect username or password";
+    }else {
+        $_SESSION['id'] = $row['id'];
+        header("Location: homepage.php");
+      }
+?>
+
+<?php
+session_start();
+
+ ?>
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>AnuFlix-Homepage</title>
+  <link rel="stylesheet" href="homepage.css" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="homepage.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+            <span class="navbar-text">AnuFlix</span>
+            <ul class="navbar-nav">
+              <?php
+              if (isset($_SESSION['id'])) {
+                if ($_SESSION['id'] == 1) {
+                  echo "<li class='nav-item'> <a href='admin.php' class='nav-link'>Add movie</a> </li>";
+                }
+              }
+              echo"<li class='nav-item'> <a href='account.php' class='nav-link'>Account</a> </li>
+                  <li class='nav-item'> <a href='logout.php' class='nav-link'>Logout</a> </li>
+                  </ul>
+                  </nav>
+                  <div class='container-fluid'>
+                  <br><br><br>";
+                  include 'dbh.php';
+                  $id = $_SESSION['id'];
+                  $quer = "SELECT * FROM user1 WHERE id = '$id' ";
+                  $quer2 = "SELECT * FROM movies WHERE mid in (SELECT mid from user1 where id = '$id') ";
+                  $check = mysqli_query($conn,$quer);
+                  $rel = mysqli_fetch_assoc($check);
+                  $check2 = mysqli_query($conn,$quer2);
+                  $rel2 = mysqli_fetch_assoc($check2);
+              echo"<h1>WELCOME </h1><i style = 'color: white;font-size: 25px'> ".ucwords($rel['name'])." !</i>
+                  </div>
+                  </header>
+                  <section>
+                <div class='jumbotron' style='margin-top:15px;padding-top:30px;padding-bottom:30px;'>
+                <div class='row'>
+                  <div class='col'>
+                    <form action='movie.php' method='POST'>
+                    <h4 style='color:black;font-size:30px;'>Recent :
+                    <input type='submit' name='submit' class='btn btn-success' style='display:inline;width:200px;margin-left:20px;margin-right:20px;' value='".ucwords($rel2['name'])."'/></h4>
+                    </form>
+                  </div>
+                  <div class='col'>
+                    <form action='search.php' method='POST'>
+                      <select  name='option' style='padding:5px;'>
+                        <option selected>Search By</option>
+                        <option value='1'>Name</option>
+                        <option value='2'>Genre</option>
+                        <option value='3'>Release year</option>
+                      </select>
+                      <input type='text' placeholder='Enter..' name='textoption' style='margin-left:10px;margin-top:10px;padding:5px;'>
+                      <input type='submit' name='submit' class='btn btn-success' style='display:inline;width:100px;margin-left:20px;margin-right:20px;margin-top:5px;' value='Search'/></h4>
+                    </form>
+                  </div>
+                </div>
+                </div>";
+                  ?>
+      <div class="jumbotron">
+        <h2 style='margin-top:0px;padding-top:0px;'>Results : </h2>
+            <?php
+            include 'searchback.php';
+            ?>
+      </div>
+  </section>
+  <footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="">chenna.anveshkumar143414@gmail.com</a>
+    </div>
+  </footer>
+  </body>
+</html>
+
+<?php
+include 'dbh.php';
+if(isset($_POST['submit'])){
+    $option = $_POST['option'];
+    $text =  strtolower($_POST['textoption']);
+    $person = $_SESSION['id'];
+    $found = "SELECT * FROM movies WHERE $option LIKE '$text%'";
+    $display = mysqli_query($conn,$found);
+  start:
+  $i=0;
+  echo"<div class='row'>";
+    while($final = mysqli_fetch_assoc($display)){
+      echo"<form action='movie.php' method='POST'>";
+      echo"<div class='col'>";
+      echo "<img src='uploads/".$final['imgpath']."' height='250' width='200' style='margin-top: 30px;margin-left:30px;margin-right:20px;' />";
+        echo"<div class='noob'>";
+          echo "<input type='submit' name='submit' class='btn btn-outline-info' style='display:block;width:200px;padding-bottom:15px;margin-bottom:30px;margin-left:30px;margin-right:20px;' value='".ucwords($final['name'])."'/>";
+        echo"</div>";
+      echo"</div>";
+      echo"</form>";
+      if ($i==4) {
+        echo"</div>";
+        goto start;
+      }
+      $i++;
+    }
+    echo"</div>";
+  }
+ ?>
+
+-- phpMyAdmin SQL Dump
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 20, 2020 at 02:08 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 5.6.39
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+--
+-- Database: `sourcecodester_omsdb`
+--
+-- --------------------------------------------------------
+--
+-- Table structure for table `movies`
+--
+CREATE TABLE `movies` (
+  `mid` int(10) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `genre` varchar(20) NOT NULL,
+  `rdate` varchar(5) NOT NULL,
+  `runtime` varchar(4) NOT NULL,
+  `decription` varchar(100) NOT NULL,
+  `viewers` int(10) DEFAULT '1',
+  `imgpath` text NOT NULL,
+  `videopath` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Dumping data for table `movies`
+--
+INSERT INTO `movies` (`mid`, `name`, `genre`, `rdate`, `runtime`, `decription`, `viewers`, `imgpath`, `videopath`) VALUES
+(1, 'rampage', 'fiction', '2017', '120', 'animals', 8, 'rampage.jpg', 'RAMPAGE Trailer.mp4'),
+(2, 'black panther', 'fiction', '2017', '140', 'super hero movie', 13, 'black panther.jpg', 'Black Panther.mp4'),
+(3, 'spiderman homecoming', 'fiction', '2018', '110', 'super hero movie', 5, 'spider-man-homecoming.jpg', 'Spider-Man Homecoming.mp4'),
+(4, 'jumanji', 'adventure', '2017', '130', '4 kids stuck in video game', 12, 'jumanji2017.jpg', 'JUMANJI 17.mp4'),
+(5, 'the conjuring', 'horror', '2013', '120', 'ghost house', 1, 'Conjuring.jpg', 'The Conjuring.mp4'),
+(6, 'the conjuring 2', 'horror', '2015', '115', 'cursed family', 1, 'conjuring2.jpg', 'The Conjuring 2.mp4'),
+(7, 'infinity wars ', 'fiction', '2018', '123', 'collaboration of all marvel characters', 5, 'infinity war.jpg', 'Avengers Infinity War.mp4'),
+(8, 's', 's', 's', '', 's', 27, 'Baby Care Website in PHP with Full Source Code.jpg', ''),
+(9, 's', 's', 's', '12', 'sd', 27, 'Online Attendance Management System in PHP with Full Source Code.jpg', 'Attendance Monitoring.mp4'),
+(10, 'sadasdas', 'asd', 'asd', '', 'asd', 19, 'Attendance Monitoring System in Android with Full Source Code.jpg', 'Attendance Monitoring.mp4');
+-- --------------------------------------------------------
+--
+-- Table structure for table `rating`
+--
+CREATE TABLE `rating` (
+  `rating_id` int(10) NOT NULL,
+  `mid` int(11) DEFAULT NULL,
+  `id` int(11) DEFAULT NULL,
+  `rate_count` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `user1`
+--
+CREATE TABLE `user1` (
+  `id` int(100) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `passwd` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `DOB` varchar(10) NOT NULL,
+  `mid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Dumping data for table `user1`
+--
+INSERT INTO `user1` (`id`, `username`, `passwd`, `name`, `phone`, `email`, `DOB`, `mid`) VALUES
+(1, 'admin@gmail.com', 'admin', 'shubham belgaonkar', '8692849041', 'shubhamb756@gmail.com', '25/04/1998', 7),
+(4, 'soubik@gmail.com', '1234', 'soubik bera', '8622849041', 'soubik@gmail.com', '16/10/1995', 7),
+(5, 'niru@gmail.com', '1234', 'niru lal', '1234287564', 'niru@gmail.com', '16/09/1996', 7),
+(6, 'janobe@gmail.com', 'admin', 's s', '9876565421', 'janobe@gmail.com', '15/01/1995', 7);
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `movies`
+--
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`mid`);
+--
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`rating_id`),
+  ADD KEY `mid` (`mid`),
+  ADD KEY `id` (`id`);
+--
+-- Indexes for table `user1`
+--
+ALTER TABLE `user1`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `mid` (`mid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `movies`
+--
+ALTER TABLE `movies`
+  MODIFY `mid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `rating_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user1`
+--
+ALTER TABLE `user1`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user1`
+--
+ALTER TABLE `user1`
+  ADD CONSTRAINT `user1_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `movies` (`mid`);
+COMMIT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+<?php
+session_start();
+
+ ?>
+ <!DOCTYPE html>
+ <head>
+   <meta charset="utf-8">
+   <title>Registration</title>
+   <link rel="stylesheet" href="user.css" type="text/css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ </head>
+ <body>
+   <header>
+     <div class="container-fluid">
+       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+           <a href="login.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+           <span class="navbar-text">NeonFlix</span>
+           <ul class="navbar-nav">
+             <li class="nav-item"> <a href="user-login.php" class="nav-link"> SignIn</a> </li>
+           </ul>
+       </nav>
+       <div class="container">
+         <div class="jumbotron">
+           <h1>Create an account</h1>
+           <p>It's free and always will be. </p> <br>
+
+           <form class="" action="user.php" method="POST">
+             <div class="row">
+               <div class="col">
+                 <input type="text" class="form-control" placeholder="First Name" name="fname" value="">
+               </div>
+               <div class="col">
+                 <input type="text" class="form-control" placeholder="Last Name" name="lname" value="">
+               </div>
+             </div> <br>
+             <input type="text" class="form-control" placeholder="Mobile Number" name="phn" value="">
+             <br>
+             <input type="email" class="form-control" placeholder="Email Address" name="mail" value="">
+             <br>
+             <input type="password" class="form-control" placeholder="Password" name="pass" value="">
+             <div class="form-group col-md-8" >
+               <label for="dob"> <br> Birthday </label>
+               <div class="row">
+                 <div class="col">
+                   <select class="form-control" name='date'>
+                     <option selected>Date..</option>
+                     <option value='1'>1</option>
+                     <option value='2'>2</option>
+                     <option value='3'>3</option>
+                     <option value='4'>4</option>
+                     <option value='5'>5</option>
+                     <option value='6'>6</option>
+                     <option value='7'>7</option>
+                     <option value='8'>8</option>
+                     <option value='9'>9</option>
+                     <option value='10'>10</option>
+                     <option value='11'>11</option>
+                     <option value='12'>12</option>
+                     <option value='13'>13</option>
+                     <option value='14'>14</option>
+                     <option value='15'>15</option>
+                     <option value='16'>16</option>
+                     <option value='17'>17</option>
+                     <option value='18'>18</option>
+                     <option value='19'>19</option>
+                     <option value='20'>20</option>
+                     <option value='21'>21</option>
+                     <option value='22'>22</option>
+                     <option value='23'>23</option>
+                     <option value='24'>24</option>
+                     <option value='25'>25</option>
+                     <option value='26'>26</option>
+                     <option value='27'>27</option>
+                     <option value='28'>28</option>
+                     <option value='29'>29</option>
+                     <option value='30'>30</option>
+                     <option value='31'>31</option>
+                 </select>
+               </div>
+                 <div class="col">
+                     <select class="form-control" name='month'>
+                       <option selected>month...</option>
+                       <option value='01'>Jan</option>
+                       <option value='02'>Feb</option>
+                       <option value='03'>Mar</option>
+                       <option value='04'>Apr</option>
+                       <option value='05'>May</option>
+                       <option value='06'>Jun</option>
+                       <option value='07'>Jul</option>
+                       <option value='08'>Aug</option>
+                       <option value='09'>Sep</option>
+                       <option value='10'>Oct</option>
+                       <option value='11'>Nov</option>
+                       <option value='12'>Dec</option>
+                     </select>
+                 </div>
+                 <div class="col">
+                   <select class="form-control" name='year'>
+                     <option selected>year...</option>
+                     <option value='1980'>1980</option>
+                     <option value='1981'>1981</option>
+                     <option value='1982'>1982</option>
+                     <option value='1983'>1983</option>
+                     <option value='1984'>1984</option>
+                     <option value='1985'>1985</option>
+                     <option value='1986'>1986</option>
+                     <option value='1987'>1987</option>
+                     <option value='1988'>1988</option>
+                     <option value='1989'>1989</option>
+                     <option value='1990'>1990</option>
+                     <option value='1991'>1991</option>
+                     <option value='1992'>1992</option>
+                     <option value='1993'>1993</option>
+                     <option value='1994'>1994</option>
+                     <option value='1995'>1995</option>
+                     <option value='1996'>1996</option>
+                     <option value='1997'>1997</option>
+                     <option value='1998'>1998</option>
+                     <option value='1999'>1999</option>
+                     <option value='2000'>2000</option>
+                     <option value='2001'>2001</option>
+                     <option value='2002'>2002</option>
+                     <option value='2003'>2003</option>
+                     <option value='2004'>2004</option>
+                     <option value='2005'>2005</option>
+                     <option value='2006'>2006</option>
+                     <option value='2007'>2007</option>
+                     <option value='2008'>2008</option>
+                     <option value='2009'>2009</option>
+                     <option value='2010'>2010</option>
+                     <option value='2011'>2011</option>
+                     <option value='2012'>2012</option>
+                     </select>
+                 </div>
+                   </div>
+
+                 </div>
+                 <div class="signupbutton">
+                   <br><br>
+                   <button type="submit" class="btn btn-success btn-lg" name="sub" value="submit">Sign Up</button>
+                 </div>
+             </div>
+           </form>
+         </div>
+       </div>
+   </div>
+ </header>
+ <footer class="page-footer font-small blue">
+   <div class="footer-copyright text-center py-3">© 2018 Copyright:
+     <a href="">shubhamb756@gmail.com</a>
+   </div>
+ </footer>
+   </body>
+ </html>
+
+<?php
+  session_start();
+  include 'dbh.php';
+if(isset($_POST['sub'])){
+    $nam = strtolower($_POST['fname']);
+    $phn =  $_POST['phn'];
+    $rid = $_SESSION['id'];
+    $date = $_POST['dob'];
+    $nsql = "UPDATE user1 SET name= '$nam', DOB= '$date',phone= '$phn' WHERE id='$rid'";
+    $result = mysqli_query($conn,$nsql);
+    header("Location: account.php");
+   }
+?>
+
+<?php
+  session_start();
+  include 'dbh.php';
+if(isset($_POST['subpass'])){
+    $oldpass = $_POST['oldp'];
+    $newpass =  $_POST['newp'];
+    $rid = $_SESSION['id'];
+    $psql = "UPDATE user1 SET passwd = '$newpass' WHERE id='$rid' AND passwd='$oldpass'";
+    $result = mysqli_query($conn,$psql);
+    header("Location: accountp.php");
+}
+?>
+
+body{
+  font-family: sans-serif;
+  height: 100%;
+}
+.navbar-text{
+  font-size: 30px;
+  font-weight: bold;
+}
+.navbar li{
+  padding: 0 40px;
+}
+.nav-item a{
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+}
+.nav-item a:hover{
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+.jumbotron{
+  position: inherit;
+  margin-top: 7%;
+}
+.jumbotron h1{
+  color: black;
+  font-weight: bold;
+}
+.container-fluid{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.7)),url(images/back.jpg);
+  height: 150vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.navbar-brand img{
+  height: 80px;
+}
+.signupbutton{
+  text-align: center;
+}
+.row img{
+  height: 60px;
+  width: 60px;
+  margin-left: 40%;
+  margin-bottom: 20%;
+}
+.page-footer{
+  background-color: black;
+  color: white;
+}
+
+
+
+<?php
+  session_start();
+  include 'dbh.php';
+    $fname = strtolower($_POST['fname']);
+    $lname =  strtolower($_POST['lname']);
+    $name = $fname." ".$lname;
+    $phn =  $_POST['phn'];
+    $email =  $_POST['mail'];
+    $username =  $_POST['mail'];
+    $password =  $_POST['pass'];
+    $date = $_POST['date'];
+    $month = $_POST['month'];
+    $year = $_POST['year'];
+    $dob = $date."/".$month."/".$year;
+    $sql = "INSERT INTO user1(username, passwd, name, phone, email, DOB)
+    values('$username','$password','$name','$phn','$email','$dob')";
+    $result = $conn->query($sql);
+    header("Location: user-login.php");
+?>
+
+body{
+  font-family: sans-serif;
+  height: 100%;
+}
+.navbar-text{
+  font-size: 30px;
+  font-weight: bold;
+}
+.navbar li{
+  padding: 0 40px;
+}
+.nav-item a{
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+}
+.nav-item a:hover{
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+.jumbotron{
+  position: sticky;
+  margin-top: 7%;
+}
+.loginbutton{
+  text-align: center;
+  align-items: center;
+}
+.jumbotron h1{
+  color: black;
+  font-weight: bold;
+}
+.container-fluid{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.7)),url(images/back.jpg);
+  height: 130vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.navbar-brand img{
+  height: 80px;
+}
+.row img{
+  height: 60px;
+  width: 60px;
+  margin-left: 40%;
+  margin-bottom: 20%;
+}
+.page-footer{
+  background-color: black;
+  color: white;
+}
+
+
+<?php
+session_start();
+
+ ?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AnuFlix-Login</title>
+    <link rel="stylesheet" href="user-login.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="login.php" class="navbar-brand"> <img src="images/logo.png" alt=""> </a>
+            <span class="navbar-text">AnuFlix</span>
+            <ul class="navbar-nav">
+              <li class="nav-item"> <a href="test.php" class="nav-link"> SignUp</a> </li>
+            </ul>
+        </nav>
+        <div class="container">
+          <div class="jumbotron">
+            <h1>Login to your account</h1> <br>
+            <form class="" action="Plogin.php" method="POST"> <br><br>
+              <input type="email" class="form-control" placeholder="Usename/ Email Address" name="mail" value="">
+              <br>
+              <input type="password" class="form-control" placeholder="Password" name="pass" value="">
+              <br><br>
+              <div class="loginbutton">
+                <button type="submit" class="btn btn-success btn-lg" name="login">Login</button>
+              </div>
+              </form>
+              </div>
+          </div>
+        </div>
+  </header>
+  <footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="">sandhyadk006@gmail.com.com</a>
+    </div>
+  </footer>
+  </body>
+</html>
